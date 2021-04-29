@@ -5,6 +5,7 @@ spring:
   application:
     name: cloud-order-service
 
+
 eureka:
   client:
     #表示是否将自己注册进eureka server 默认为true

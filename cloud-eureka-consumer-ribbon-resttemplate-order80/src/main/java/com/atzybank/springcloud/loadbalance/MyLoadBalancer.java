@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 自定义负载均衡算法
  */
-//@Component
+@Component
 public class MyLoadBalancer implements LoadBalancer{
 
     private AtomicInteger atomicInteger = new AtomicInteger(0);
