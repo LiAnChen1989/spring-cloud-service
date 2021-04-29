@@ -1,24 +1,22 @@
 server:
-  port: 3344
+  port: 3355
 
 spring:
   devtools:
     add-properties: true
   application:
-    name: cloud-config-center
+    name: cloud-config-client
   cloud:
     config:
-      server:
-        git:
-#          uri: git@github.com:LiAnChen1989/springcloud-config.git
-          uri: https://github.com/LiAnChen1989/springcloud-config.git
-          search-paths:
-            - springcloud-config
-          default-label: master
-          username: LiAnChen1989
-          password: Cl@github1989
-          skip-ssl-validation: true
-#      label: master
+      label: master #分支名称
+      name: config #配置文件名称
+      profile: dev #配置文件后缀名
+      uri: http://localhost:3344 #配置中心地址
+  rabbitmq:
+    addresses: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:
@@ -29,9 +27,17 @@ eureka:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
   instance:
-    instance-id: config-center-3344
+    instance-id: config-center-3355
     prefer-ip-address: true
     #Eureka客户端向服务端发送心跳时间间隔，单位为秒（默认是30秒）
     #    lease-renewal-interval-in-seconds: 1
     #Eureka服务端在收到最后一次心跳后等待时间上限，单位为秒（默认是90秒），超时将剔除服务
 #    lease-expiration-duration-in-seconds: 2
+
+
+#暴露 監控端點
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
