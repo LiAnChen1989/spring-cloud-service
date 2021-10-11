@@ -1,0 +1,43 @@
+server:
+  port: 2001
+spring:
+  application:
+    name: seata-order-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8648
+    alibaba:
+      seata:
+        tx-service-group: fsp_tx_group
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_order?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    password: 123456
+    username: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+feign:
+  hystrix:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    io:
+      seata: info
+
+mybatis:
+  mapperLocations: classpath:mybatis/mapper/*.xml
+#  config-location: classpath:mybatis/mybatis-config.xml
+  #有了此配置 就不需要mybatis的全局配置文件了，否则会冲突
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
